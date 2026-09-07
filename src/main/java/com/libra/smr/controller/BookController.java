@@ -19,7 +19,7 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks() {
+    public List<BookResponseDto> getAllBooks() {
         return bookService.getAllBooks();
     }
 
@@ -29,7 +29,7 @@ public class BookController {
     }
 
     @PostMapping
-    public Book createBook(@RequestBody BookRequestDto bookRequestDto) {
+    public BookResponseDto createBook(@RequestBody BookRequestDto bookRequestDto) {
         return bookService.createBook(bookRequestDto);
     }
 

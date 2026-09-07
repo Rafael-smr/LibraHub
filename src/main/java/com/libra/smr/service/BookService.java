@@ -20,22 +20,21 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public List<BookResponseDto> getAllBooks() {
+        return bookRepository.findAll()
+                .stream()
+                .map(BookResponseDto::new)
+                .toList();
     }
 
-    public BookResponseDto getBookById(long id) throws BookNotFoundException {
+    public BookResponseDto getBookById(long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Book not found"));
 
-        Optional<Book> book = bookRepository.findById(id);
-
-        if (book.isEmpty()) {
-            throw new BookNotFoundException("Book not found");
-        }
-
-        return new BookResponseDto(book.get());
+        return new BookResponseDto(book);
     }
 
-    public Book createBook(BookRequestDto bookRequestDto) {
+    public BookResponseDto createBook(BookRequestDto bookRequestDto) {
 
         Book book = new Book();
 
@@ -43,7 +42,9 @@ public class BookService {
         book.setAuthor(bookRequestDto.author());
         book.setStatus(BookStatus.AVAILABLE);
 
-        return bookRepository.save(book);
+        Book savedBook = bookRepository.save(book);
+
+        return new BookResponseDto(savedBook);
     }
 
     public void deleteBook(long id) {
@@ -53,6 +54,6 @@ public class BookService {
     }
 
     public void updateBook(Book book) {
-        //percebi que esse seria mais dificil do que eu pensei
+        Book updatedBook = bookRepository.save(book);
     }
 }
