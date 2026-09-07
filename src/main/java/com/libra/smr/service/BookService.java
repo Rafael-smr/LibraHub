@@ -9,7 +9,6 @@ import com.libra.smr.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService {
@@ -53,7 +52,15 @@ public class BookService {
         bookRepository.delete(book);
     }
 
-    public void updateBook(Book book) {
+    public BookResponseDto updateBook(Long id, BookRequestDto bookRequestDto) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Book not found"));
+
+        book.setTitle(bookRequestDto.title());
+        book.setAuthor(bookRequestDto.author());
+
         Book updatedBook = bookRepository.save(book);
+
+        return new BookResponseDto(updatedBook);
     }
 }

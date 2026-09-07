@@ -2,8 +2,8 @@ package com.libra.smr.controller;
 
 import com.libra.smr.dto.BookRequestDto;
 import com.libra.smr.dto.BookResponseDto;
-import com.libra.smr.entity.Book;
 import com.libra.smr.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,12 +29,17 @@ public class BookController {
     }
 
     @PostMapping
-    public BookResponseDto createBook(@RequestBody BookRequestDto bookRequestDto) {
+    public BookResponseDto createBook(@RequestBody @Valid BookRequestDto bookRequestDto) {
         return bookService.createBook(bookRequestDto);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable long id) {
         bookService.deleteBook(id);
+    }
+
+    @PutMapping("/{id}")
+    public BookResponseDto updateBook(@PathVariable long id,@Valid @RequestBody BookRequestDto bookRequestDto) {
+        return bookService.updateBook(id, bookRequestDto);
     }
 }
