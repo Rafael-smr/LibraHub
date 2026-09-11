@@ -1,6 +1,6 @@
 package com.libra.smr.entity;
 
-import com.libra.smr.enums.BookStatus;
+import com.libra.smr.entity.enums.BookStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

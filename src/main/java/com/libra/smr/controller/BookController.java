@@ -4,6 +4,7 @@ import com.libra.smr.dto.BookRequestDto;
 import com.libra.smr.dto.BookResponseDto;
 import com.libra.smr.service.BookService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable long id) {
         bookService.deleteBook(id);
     }

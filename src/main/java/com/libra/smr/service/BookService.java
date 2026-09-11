@@ -3,7 +3,7 @@ package com.libra.smr.service;
 import com.libra.smr.dto.BookRequestDto;
 import com.libra.smr.dto.BookResponseDto;
 import com.libra.smr.entity.Book;
-import com.libra.smr.enums.BookStatus;
+import com.libra.smr.entity.enums.BookStatus;
 import com.libra.smr.exception.BookNotFoundException;
 import com.libra.smr.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -47,7 +47,8 @@ public class BookService {
     }
 
     public void deleteBook(long id) {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("Book not found"));
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Book not found"));
 
         bookRepository.delete(book);
     }

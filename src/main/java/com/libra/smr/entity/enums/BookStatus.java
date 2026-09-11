@@ -1,4 +1,4 @@
-package com.libra.smr.enums;
+package com.libra.smr.entity.enums;
 
 public enum BookStatus {
     AVAILABLE,
