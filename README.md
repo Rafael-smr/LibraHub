@@ -12,11 +12,14 @@ O projeto tem como objetivo colocar em prática conceitos de desenvolvimento bac
 
 * **Java 25**
 * **Spring Boot 4.1.1**
+* **Spring Web**
 * **Spring Data JPA**
 * **Hibernate**
 * **PostgreSQL**
 * **Maven**
 * **Lombok**
+* **Bean Validation**
+* **Spring Boot DevTools**
 
 ---
 
@@ -57,6 +60,9 @@ Responsável pelo acesso e persistência dos dados utilizando Spring Data JPA.
 **Entity**
 Representa as entidades que serão persistidas no banco de dados.
 
+**DTO**
+Responsável por definir os dados recebidos e enviados pela API, evitando a exposição direta das entidades nas respostas.
+
 ---
 
 ## 🗄️ Banco de dados
@@ -68,7 +74,6 @@ Configuração utilizada durante o desenvolvimento:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/librahub
 spring.datasource.username=postgres
-spring.datasource.password=a
 ```
 
 > ⚠️ Em um ambiente real, credenciais não devem ser armazenadas diretamente no arquivo de configuração versionado no Git. O ideal é utilizar variáveis de ambiente ou outro mecanismo seguro de configuração.
@@ -102,6 +107,38 @@ BORROWED
 LOST
 DAMAGED
 ```
+
+O status de um novo livro é definido automaticamente como `AVAILABLE`.
+
+---
+
+## 📦 DTOs
+
+O projeto utiliza DTOs para separar os dados de entrada e saída da API.
+
+### BookRequestDto
+
+Utilizado para receber os dados enviados pelo cliente ao criar ou atualizar um livro.
+
+```text
+title
+author
+```
+
+Os campos possuem validações utilizando **Bean Validation**, como `@NotBlank` e `@Size`.
+
+### BookResponseDto
+
+Utilizado para definir os dados retornados pela API:
+
+```text
+id
+title
+author
+status
+```
+
+Essa separação evita que a entidade `Book` seja exposta diretamente pela API.
 
 ---
 
@@ -169,7 +206,7 @@ http://localhost:8080
 
 ## 🔌 Endpoints
 
-Os endpoints estão sendo implementados gradualmente conforme o desenvolvimento do projeto.
+Atualmente, o módulo de livros possui um CRUD completo.
 
 ### Livros
 
@@ -180,8 +217,6 @@ Os endpoints estão sendo implementados gradualmente conforme o desenvolvimento 
 | `POST`   | `/books`      | Cadastra um novo livro |
 | `PUT`    | `/books/{id}` | Atualiza um livro      |
 | `DELETE` | `/books/{id}` | Remove um livro        |
-
-> 🚧 Alguns endpoints ainda estão em desenvolvimento.
 
 ---
 
@@ -219,9 +254,10 @@ O LibraHub está sendo desenvolvido principalmente para praticar:
 * Hibernate
 * Integração com PostgreSQL
 * Persistência de dados
+* DTOs
+* Validação de dados
 * Regras de negócio
 * Tratamento de exceções
-* Validação de dados
 * Boas práticas de desenvolvimento backend
 
 ---
@@ -230,13 +266,13 @@ O LibraHub está sendo desenvolvido principalmente para praticar:
 
 O projeto continuará sendo evoluído com novas funcionalidades, incluindo:
 
-* [ ] CRUD completo de livros
-* [ ] Validação de dados
+* [x] CRUD de livros
+* [x] DTOs
+* [x] Validação de dados
 * [ ] Tratamento global de exceções
 * [ ] Regras para empréstimo e devolução
 * [ ] Gerenciamento de usuários
 * [ ] Relacionamento entre usuários e livros
-* [ ] DTOs
 * [ ] Testes automatizados
 * [ ] Documentação da API
 * [ ] Melhorias na segurança da aplicação
@@ -247,6 +283,8 @@ O projeto continuará sendo evoluído com novas funcionalidades, incluindo:
 
 O **LibraHub** é um projeto de estudo e portfólio desenvolvido para aprofundar conhecimentos em **Java, Spring Boot e desenvolvimento backend**.
 
-A ideia é evoluir a aplicação gradualmente, aplicando os conceitos conforme eles são estudados e transformando o projeto em uma API cada vez mais completa.
+A aplicação está sendo evoluída gradualmente, aplicando os conceitos conforme são estudados e transformando o projeto em uma API cada vez mais completa.
+
+A documentação deste projeto foi desenvolvida com **auxílio de Inteligência Artificial** durante o processo de desenvolvimento e organização do projeto.
 
 **Em desenvolvimento ☕💻**
