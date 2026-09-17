@@ -2,6 +2,7 @@ package com.libra.smr.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,10 +27,14 @@ public class Member {
     private String name;
 
     @Column(nullable = false)
-    @NotBlank
+    @NotNull
     private LocalDate when;
 
     @Column(nullable = false)
-    @NotBlank
+    @NotNull
     private LocalDate returnDate;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
 }
