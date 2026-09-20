@@ -28,7 +28,7 @@ public class Member {
 
     @Column(nullable = false)
     @NotNull
-    private LocalDate when;
+    private LocalDate loanDate;
 
     @Column(nullable = false)
     @NotNull
