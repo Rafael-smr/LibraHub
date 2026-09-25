@@ -39,4 +39,7 @@ public class Loan {
 
     @Column(nullable = false)
     private int renewalCount = 0;
+
+    @Column(nullable = false)
+    private LocalDate returnedAt;
 }

@@ -100,8 +100,13 @@ public class LoanService {
 
         Book book = loan.getBook();
 
+        LocalDate returnedAt = LocalDate.now();
+
         book.setStatus(BookStatus.AVAILABLE);
         bookRepository.save(book);
+
+        loan.setReturnedAt(returnedAt);
+        loanRepository.save(loan);
 
         return new LoanResponseDto(loan);
     }

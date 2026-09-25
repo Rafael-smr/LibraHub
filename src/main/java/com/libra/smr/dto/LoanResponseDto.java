@@ -9,7 +9,8 @@ public record LoanResponseDto(
         LocalDate loanDate,
         LocalDate returnDate,
         Long bookId,
-        Long memberId
+        Long memberId,
+        LocalDate returnedAt
 ) {
     public LoanResponseDto(Loan loan) {
         this(
@@ -17,7 +18,8 @@ public record LoanResponseDto(
                 loan.getLoanDate(),
                 loan.getReturnDate(),
                 loan.getBook().getId(),
-                loan.getMember().getId()
+                loan.getMember().getId(),
+                loan.getReturnedAt()
         );
     }
 }
